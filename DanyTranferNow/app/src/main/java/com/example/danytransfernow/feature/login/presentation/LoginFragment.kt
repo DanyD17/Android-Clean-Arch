@@ -1,0 +1,84 @@
+package com.example.danytransfernow.feature.login.presentation
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.example.danytransfernow.R
+import com.example.danytransfernow.databinding.FragmentLoginBinding
+import com.example.danytransfernow.feature.login.domain.usecase.LoginParams
+import com.example.danytransfernow.feature.transfer.presentation.DashboardActivity
+import com.example.danytransfernow.feature.transfer.presentation.DashboardViewModel
+import dagger.hilt.android.AndroidEntryPoint
+
+/**
+ * A simple [Fragment] subclass as the default destination in the navigation.
+ */
+@AndroidEntryPoint
+class LoginFragment : Fragment() {
+
+    private var _binding: FragmentLoginBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
+
+    private val viewModel: LoginViewModel by viewModels()
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.buttonFirst.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+        viewModel.isSuccess.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                hidShowProgress(false)
+                startActivity(Intent(activity, DashboardActivity::class.java))
+            }
+        })
+        binding.buttonLogin.setOnClickListener {
+            hidShowProgress(true)
+
+        }
+    }
+
+    fun validateAndLogin(){
+        if (binding.usernameEditText.text.toString().isEmpty()){
+
+        }
+        viewModel.login(
+            LoginParams(
+                binding.usernameEditText.text.toString(),
+                binding.passwordEditText.text.toString()
+            )
+        )
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    fun hidShowProgress(isShow: Boolean) {
+        if (isShow) {
+            binding.progress.visibility = View.VISIBLE
+        } else {
+            binding.progress.visibility = View.GONE
+        }
+
+    }
+}
