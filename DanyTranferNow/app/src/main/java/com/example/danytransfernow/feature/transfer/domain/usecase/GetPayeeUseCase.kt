@@ -8,9 +8,10 @@ import javax.inject.Inject
 
 
 class GetPayeeUseCase @Inject constructor(private val repository: TransactionsRepository) :
-    SingleUseCase<Payees, LoginParams>() {
+    SingleUseCase<Payees, Any?>() {
 
-    override fun buildUseCaseSingle(params: LoginParams): Single<Payees> {
+
+    override fun buildUseCaseSingle(params: Any?): Single<Payees> {
         return repository.getPayeees()
     }
 }
