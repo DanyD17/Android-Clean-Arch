@@ -15,7 +15,6 @@ class AuthRepositoryImp @Inject constructor(
     private val authDataSource: AuthDataSource
 ) :
     AuthRepository {
-
     override fun login(username: String, password: String): Single<User> {
         return authDataSource.login(username = username, password = password)
     }
