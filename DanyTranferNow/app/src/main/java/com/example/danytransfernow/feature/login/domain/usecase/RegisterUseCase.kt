@@ -11,6 +11,6 @@ class RegisterUseCase  @Inject constructor(private val repository: AuthRepositor
     SingleUseCase<User, LoginParams>() {
 
     override fun buildUseCaseSingle(params: LoginParams): Single<User> {
-        return repository.login(username = params.username, password = params.password)
+        return repository.register(username = params.username, password = params.password)
     }
 }

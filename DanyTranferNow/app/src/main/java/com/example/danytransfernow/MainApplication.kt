@@ -9,11 +9,7 @@ import dagger.hilt.android.HiltAndroidApp
 @HiltAndroidApp
 class MainApplication : Application() {
     companion object{
-        lateinit var user: User
-    }
-
-    override fun onCreate() {
-        super.onCreate()
+         var user: User? = null
     }
 
     override fun attachBaseContext(base: Context) {

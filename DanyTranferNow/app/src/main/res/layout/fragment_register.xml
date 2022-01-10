@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:padding="16dp">
 
@@ -38,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
         android:background="@drawable/button_border"
         android:backgroundTint="@color/black"
         android:padding="10dp"
@@ -48,11 +48,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_editText"
+        android:id="@+id/username_InputText"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
         android:hint="Username"
         android:textColorHint="@color/black"
         app:boxStrokeColor="@color/black"
@@ -60,11 +62,13 @@
         app:endIconMode="clear_text"
         app:endIconTint="@color/black"
         app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_first"
-        app:startIconTint="@color/black"
-        tools:layout_editor_absoluteX="16dp">
+        app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/username_editText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text"
@@ -73,11 +77,13 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_editText"
+        android:id="@+id/password_InputText"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:hint="Password"
         android:textColorHint="@color/black"
         app:boxStrokeColor="@color/black"
@@ -85,11 +91,13 @@
         app:endIconMode="clear_text"
         app:endIconTint="@color/black"
         app:hintTextColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/username_editText"
-        app:startIconTint="@color/black"
-        tools:layout_editor_absoluteX="16dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username_InputText"
+        app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pass_editText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text"
@@ -98,23 +106,27 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/confirm_password_editText"
+        android:id="@+id/confirm_password_InputText"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:hint="Password"
+        android:layout_marginEnd="16dp"
+        android:hint="Confirm Password"
         android:textColorHint="@color/black"
         app:boxStrokeColor="@color/black"
         app:boxStrokeWidthFocused="2dp"
         app:endIconMode="clear_text"
         app:endIconTint="@color/black"
         app:hintTextColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/password_editText"
-        app:startIconTint="@color/black"
-        tools:layout_editor_absoluteX="16dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_InputText"
+        app:startIconTint="@color/black">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/confirm_password_editText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text"
@@ -123,8 +135,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">

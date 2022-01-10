@@ -11,7 +11,7 @@ import javax.inject.Inject
  * This repository is responsible for
  * fetching data[User] from server
  * */
-abstract class AuthDataSource() {
+abstract class AuthDataSource {
     abstract fun login(username: String, password: String): Single<User>
     abstract fun register(username: String, password: String): Single<User>
 
@@ -27,7 +27,7 @@ class AuthDataSourceImp @Inject constructor(
     }
 
     override fun register(username: String, password: String): Single<User> {
-        return retrofitService.register(username, password)
+        return retrofitService.register(UserLogin(username = username, password = password))
     }
 
 

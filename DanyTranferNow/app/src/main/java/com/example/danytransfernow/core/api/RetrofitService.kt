@@ -2,11 +2,14 @@ package com.example.danytransfernow.core.api
 
 import com.example.danytransfernow.feature.login.domain.model.User
 import com.example.danytransfernow.feature.login.domain.model.UserLogin
+import com.example.danytransfernow.feature.login.domain.usecase.TransferReqParam
+import com.example.danytransfernow.feature.transfer.domain.model.Balance
+import com.example.danytransfernow.feature.transfer.domain.model.Payees
+import com.example.danytransfernow.feature.transfer.domain.model.TransactionList
 import io.reactivex.Single
-
 import retrofit2.http.Body
-import retrofit2.http.Field
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface RetrofitService {
@@ -17,21 +20,21 @@ interface RetrofitService {
     ): Single<User>
 
     @POST("register")
+    @Headers("No-Authentication: true")
     fun register(
-        @Field("username") username: String,
-        @Field("password") password: String,
+        @Body login: UserLogin
     ): Single<User>
 
     @GET("balance")
-    fun getBalance(): Single<List<User>>
+    fun getBalance(): Single<Balance>
 
     @GET("payees")
-    fun getPayees(): Single<List<User>>
+    fun getPayees(): Single<Payees>
 
     @GET("transactions")
-    fun getTransactions(): Single<List<User>>
+    fun getTransactions(): Single<TransactionList>
 
     @POST("transfer")
-    fun transfer(): Single<List<User>>
+    fun transfer(@Body pay: TransferReqParam): Single<ApiResponse>
 
 }

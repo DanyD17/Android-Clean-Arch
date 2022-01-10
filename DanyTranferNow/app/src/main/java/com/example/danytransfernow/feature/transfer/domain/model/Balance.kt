@@ -1,6 +1,7 @@
 package com.example.danytransfernow.feature.transfer.domain.model
 
-data class TransactionList(
+data class Balance(
     val status: String,
-    val data: List<Transaction>
+    val balance: Float,
+    val accountNo: String,
 )

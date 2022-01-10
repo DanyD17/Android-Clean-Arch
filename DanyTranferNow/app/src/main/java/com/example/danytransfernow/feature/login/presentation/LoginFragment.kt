@@ -2,10 +2,10 @@ package com.example.danytransfernow.feature.login.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -13,7 +13,6 @@ import com.example.danytransfernow.R
 import com.example.danytransfernow.databinding.FragmentLoginBinding
 import com.example.danytransfernow.feature.login.domain.usecase.LoginParams
 import com.example.danytransfernow.feature.transfer.presentation.DashboardActivity
-import com.example.danytransfernow.feature.transfer.presentation.DashboardViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -42,25 +41,33 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.buttonLogin.setBackgroundResource(R.drawable.button_border)
+
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
         viewModel.isSuccess.observe(viewLifecycleOwner, Observer {
             it?.let {
                 hidShowProgress(false)
-                startActivity(Intent(activity, DashboardActivity::class.java))
+                if (it)
+                    startActivity(Intent(activity, DashboardActivity::class.java))
             }
         })
         binding.buttonLogin.setOnClickListener {
             hidShowProgress(true)
-
+            validateAndLogin()
         }
     }
 
-    fun validateAndLogin(){
-        if (binding.usernameEditText.text.toString().isEmpty()){
+    private fun validateAndLogin() {
+        if (binding.usernameEditText.text.toString().isEmpty())
+            binding.loginUsernameEditText.error = "UserName is required"
+        else binding.loginPasswordEditText.error = null
 
-        }
+        if (binding.passwordEditText.text.toString().isEmpty())
+            binding.loginPasswordEditText.error = "Password is required"
+        else binding.loginPasswordEditText.error = null
+
         viewModel.login(
             LoginParams(
                 binding.usernameEditText.text.toString(),
@@ -68,12 +75,13 @@ class LoginFragment : Fragment() {
             )
         )
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    fun hidShowProgress(isShow: Boolean) {
+    private fun hidShowProgress(isShow: Boolean) {
         if (isShow) {
             binding.progress.visibility = View.VISIBLE
         } else {

@@ -1,16 +1,22 @@
 package com.example.danytransfernow.feature.login.domain.usecase
 
 import com.example.danytransfernow.core.useCase.SingleUseCase
-import com.example.danytransfernow.feature.login.domain.model.User
 import com.example.danytransfernow.feature.login.domain.repository.TransactionsRepository
+import com.example.danytransfernow.feature.transfer.domain.model.TransactionList
 import io.reactivex.Single
 import javax.inject.Inject
 
 
-class TransferUseCase  @Inject constructor(private val repository: TransactionsRepository) :
-    SingleUseCase<User, LoginParams>() {
-
-    override fun buildUseCaseSingle(params: LoginParams): Single<User> {
-        return repository.login(username = params.username, password = params.password)
+class TransferUseCase @Inject constructor(private val repository: TransactionsRepository) :
+    SingleUseCase<TransactionList, TransferReqParam>() {
+    override fun buildUseCaseSingle(params: TransferReqParam): Single<TransactionList> {
+        return repository.getTransactionList()
     }
+
 }
+
+data class TransferReqParam(
+    val receipientAccountNo: String,
+    val amount: Float,
+    val description: String,
+)
