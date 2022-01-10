@@ -17,5 +17,9 @@
         android:id="@+id/transferFragment"
         android:name="com.example.danytransfernow.feature.transfer.presentation.TransferFragment"
         android:label="transfer_fragment"
-        tools:layout="@layout/transfer_fragment" />
+        tools:layout="@layout/transfer_fragment">
+        <action
+            android:id="@+id/action_transferFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
 </navigation>
