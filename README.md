@@ -1,6 +1,6 @@
 # Android-Clean-Arch
 
-#This is the Adroid Proje developed using Clean Architecture and SOLID principles
+#This is the Adroid Proje developed using Clean Architecture and SOLID principles and using TTD aprroch
 #Tech stack used: 
 # 1.Kotlin
 # 2.Hilt for dependancy injection 
